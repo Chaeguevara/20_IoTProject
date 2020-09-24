@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+$(document).ready(function(){
+	var i = 0;
+	var txt = 'HTML Content..';
+	$('button').eq(0).click(function(){
+		$('div').append('<h1>'+txt+ i+'</h1>');
+		i++;
+	});
+	$('button').eq(1).click(function(){
+		$('div').prepend('<h1>'+txt+ i+'</h1>');
+		i++;
+	});
+	$('button').eq(2).click(function(){
+		$('div').after('<h1>'+txt+ i+'</h1>');
+		i++;
+	});
+	$('button').eq(3).click(function(){
+		$('div').before('<h1>'+txt+ i+'</h1>');
+		i++;
+	});
+	$('button').eq(4).click(function(){
+		$('div').remove();
+		i = 0;
+	});
+	$('button').eq(5).click(function(){
+		$('div').empty();
+		i = 0;
+	});
+});
+</script>
+</head>
+<body>
+<h1>Append Test</h1>
+<button>Append</button>
+<button>Prepend</button>
+<button>After</button>
+<button>Before</button>
+<button>Remove</button>
+<button>Empty</button>
+<div></div>
+</body>
+</html>
+
+
+
+
+

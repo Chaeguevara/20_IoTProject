@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+
+</style>
+<script>
+function register(){
+	var id = $('#register_form > input[name="id"]').val();
+	var pwd = $('#register_form > input[name="pwd"]').val();
+	var age = $('#register_form > input[name="age"]').val();
+	if(id == '' || id == null){
+		alert('ID is Madatory Field..');
+		$('#register_form > input[name="id"]').focus();
+		return;
+	}
+	if(pwd == '' || pwd == null){
+		alert('PWD is Madatory Field..');
+		$('#register_form > input[name="pwd"]').focus();
+		return;
+	}
+	if(age == '' || age == null){
+		alert('AGE is Madatory Field..');
+		$('#register_form > input[name="age"]').focus();
+		return;
+	}
+	$('#register_form').attr({
+		'action':'register',
+		'method':'post'
+	}).submit();
+};
+
+$(document).ready(function(){
+	$('#register_form > a').click(function(){
+		register();
+	});
+});
+</script>
+</head>
+<body>
+<h1>jQuery Register</h1>
+<form id="register_form">
+ID<input type="text" name="id"><br>
+PWD<input type="password" name="pwd"><br>
+AGE<input type="number" name="age"><br>
+<a href="#">Register</a>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

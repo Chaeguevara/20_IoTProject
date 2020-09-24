@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+$.ajax(
+	{
+		method:'GET',
+		url : 'http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList?serviceKey=NuvoUrkE7SSIULP315eGuE9WgDLpDXwL3jkfiG9ftsOB63tR6TPYmNT45fOg%2FKSOSN6n%2BWYJp1dE7bHXzQyfzg%3D%3D&pageNo=1&numOfRows=10&dataType=XML&dataCd=ASOS&dateCd=DAY&startDt=20100101&endDt=20100601&stnIds=108&',
+		dataType: 'jsonp',
+		success:function(data){
+			alert(data);
+		},
+		error:function(){}
+	}
+		
+		);
+</script>
+</head>
+<body>
+<h1>jQuery Table Test</h1>
+<button>Click</button>
+<div></div>
+</body>
+</html>
+
+
+
+

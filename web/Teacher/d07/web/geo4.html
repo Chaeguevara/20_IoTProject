@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68a1098d67420b093c3665634d712378"></script>
+
+<style>
+#map{
+	width:600px;
+	height:600px;
+	border:2px solid blue;
+}
+</style>
+<script>
+var map = null;
+
+function setMarkers(arrs){
+	$(arrs).each(function(index,geo){
+	    var marker = new kakao.maps.Marker({
+	        title:geo.name,
+	    	position: new kakao.maps.LatLng(geo.lat, geo.lng)
+	    });
+	    marker.setMap(map);
+	    
+	    var iwContent = '<div style="padding:5px;"><a href="'+geo.url+'">'+geo.name+'</a></div>', 
+	    iwRemoveable = true; 
+
+		var infowindow = new kakao.maps.InfoWindow({
+	    	content : iwContent,
+	    	removable : iwRemoveable
+		});
+
+		kakao.maps.event.addListener(marker, 'click', function() {
+	      infowindow.open(map, marker);  
+		});
+	    
+	});
+};
+
+function getData(loc){
+	var arrs = null;
+	$.ajax({
+		url:'geo',
+		async:false,
+		data:{cmd:loc},
+		success:function(data){
+			arrs = data;
+		},
+		error:function(){
+			
+		}
+	});
+	return arrs;
+};
+
+function panTo(lat, lng, loc) {
+    var moveLatLon = new kakao.maps.LatLng(lat, lng);
+    map.panTo(moveLatLon);     
+    var arrs = getData(loc);
+    setMarkers(arrs);
+};   
+
+function mapDislapy(){
+	var container = document.getElementById('map');
+	var options = {
+		center: new kakao.maps.LatLng(37.549530, 126.989045),
+		level: 8
+	};
+	map = new kakao.maps.Map(container, options);
+};
+
+$(document).ready(function(){
+	mapDislapy();
+	$('button:eq(0)').click(function(){
+		//seoul
+		panTo(37.549530, 126.989045,0);
+	});
+	$('button:eq(1)').click(function(){
+		//busan
+		panTo(35.1319943,129.0641646,1);
+	});
+});
+</script>
+</head>
+<body>
+<button>Seoul</button>
+<button>Busan</button>
+<div id="map"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

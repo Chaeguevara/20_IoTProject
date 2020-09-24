@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+
+</style>
+<script>
+$(document).ready(function(){
+	$('#login_form > a').click(function(){
+		var id = $('input[name="id"]').val();
+		var pwd = $('input[name="pwd"]').val();
+		if(id == null || id == ''){
+			alert('ID is Madatory..');
+			$('input[name="id"]').focus();
+			return;
+		}
+		if(pwd == null || pwd == ''){
+			alert('PWD is Madatory..');
+			$('input[name="pwd"]').focus();
+			return;
+		}
+		$('#login_form').attr({
+			'action':'login',
+			'method':'post'
+		}).submit();
+	});
+});
+</script>
+</head>
+<body>
+<h1>jQuery Form Test</h1>
+<form id="login_form">
+ID <input type="text" name="id"><br>
+PWD <input type="password" name="pwd"><br>
+<a href="#">LOGIN</a>
+</form>
+</body>
+</html>
+
+
+
+
+
+

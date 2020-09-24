@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+#result{
+	width:600px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(data){
+	var datas = $(data).find('documents');
+	$(datas).each(function(index,d){
+		var result = '';
+		result += '<h2>'+$(d).find('address_name').text()
+		           +'</h2>';
+		$('#result').append(result);
+	});
+};
+
+function getData(){
+	var urlstr = 
+   'https://dapi.kakao.com/v2/local/search/address.xml';
+	var loc = $('input[name="loc"]').val();
+	$.ajax({
+		method:'GET',
+		url:urlstr,
+		headers:{'Authorization' : 'KakaoAK 0db944a9909842d7d693b199ba6f7faa'},
+		data:{'query':loc},
+		dataType:'xml',
+		success:function(data){
+			//alert(data);
+			display(data);
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+};
+
+$(document).ready(function(){
+	$('button').click(function(){
+		getData();
+	});
+});
+</script>
+</head>
+<body>
+<button>GET DATA</button>
+<input type="text" name="loc">
+<div id="result"></div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+#product{
+	width:800px;
+	height:200px;
+	border:2px solid blue;
+}
+#product > div{
+	width:150px;
+	height:190px;
+	border:3px dotted yellow;
+	float:left;
+}
+#product > div > img{
+	width:80px;
+	height:80px;
+}
+#cart{
+    width:800px;
+	height:200px;
+	border:2px solid red;
+	overflow: auto;
+}
+#cart > img {
+	width:30px;
+	height:30px;
+}
+</style>
+<script>
+var products = null;
+var sum = 0;
+
+function display(datas){
+	
+	$(datas).each(function(index,data){
+		var result = '';
+		result += '<div num="'+index+'">';
+		result += '<img src="img/'+data.img+'">'
+		result += '<p>'+data.name+'</p>';
+		result += '<p>'+data.stock+'</p>';
+		result += '<p>'+data.price+'</p>';
+		result += '</div>';
+		$('#product').append(result);
+	});
+};
+function getData(){
+	products = [
+		{id:'001',name:'햄버거1',price:10000,img:'h1.jpg',stock:10},
+		{id:'002',name:'햄버거2',price:20000,img:'h2.jpg',stock:20},
+		{id:'003',name:'햄버거3',price:30000,img:'h3.jpg',stock:30},
+		{id:'004',name:'햄버거4',price:40000,img:'h4.jpg',stock:40},
+		{id:'005',name:'햄버거5',price:50000,img:'h5.jpg',stock:50}
+	];
+	display(products);
+};
+function cart(n){
+
+	var name = products[n].name;
+	var price = products[n].price;
+	var img = products[n].img;
+	var result = '';
+	result += '<img src="img/'+img+'">';
+	result += name+' '+price+'<br>';
+	$('#cart').append(result);
+	sum += price;
+	$('#sum > span').text(sum);
+	
+};
+$(document).ready(function(){
+	getData();
+	$('#product > div').click(function(){
+		var num = $(this).attr('num');
+		cart(num);
+	});
+});
+</script>
+</head>
+<body>
+<h1>POS SYSTEM</h1>
+<div id="product"></div>
+<h1 id="sum">total:<span></span></h1>
+<div id="cart"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+

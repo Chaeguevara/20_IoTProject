@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+
+</style>
+<script>
+function display(text){
+	$('h1:eq(1)').html(text);
+};
+
+function sendData(d){
+	$.ajax({
+		url:'getdata2',
+		async:false,
+		data:{cmd:d},
+		success:function(result){
+			display(result);
+		},
+		error:function(){
+			alert('Error.....');
+		}
+	});
+};
+$(document).ready(function(){
+	
+	setInterval(function(){
+		var data = $('input[name="data"]').val();
+		sendData(data);
+	},3000);
+	
+	$('button').click(function(){
+		var data = $('input[name="data"]').val();
+		sendData(data);
+	});
+});
+</script>
+</head>
+<body>
+<h1>AJAX TEST</h1>
+<button>Click</button>
+<input type="text" name="data">
+<h1>Result</h1>
+</body>
+</html>
+
+
+

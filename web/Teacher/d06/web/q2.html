@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(emps){
+	var result = '';
+	$(emps).each(function(index,emp){
+		result += '<h1>';
+		result += emp.id+' '+emp.pwd+' '+emp.name;
+		result += '</h1>';
+	});
+	$('div').html(result);
+};
+
+function getData(){
+	var ems = [
+		{id:'id01',pwd:'pwd01',name:'james1'},
+		{id:'id02',pwd:'pwd02',name:'james2'},
+		{id:'id03',pwd:'pwd03',name:'james3'},
+		{id:'id04',pwd:'pwd04',name:'james4'},
+		{id:'id05',pwd:'pwd05',name:'james5'}
+	];
+	display(ems);
+};
+
+$(document).ready(function(){
+	$('a').click(function(){
+		getData();
+	});
+});
+</script>
+</head>
+<body>
+<h1>jQuery Array Test</h1>
+<a href="#">GET DATA</a>
+<div></div>
+</body>
+</html>
+
+
+
+

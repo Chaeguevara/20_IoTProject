@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+.user_list{
+	border-collapse: collapse;
+	border-top:1px solid red;
+	width: 400px;
+	height:100px;
+}
+.user_list thead{
+	background: black;
+	color:white;
+}
+.user_list td{
+	border-top:1px solid red;
+	border-bottom:1px solid red;
+	text-align: center;
+}
+
+.user_list td:nth-child(1) {
+	text-align: center;
+}
+.user_list tbody > tr:nth-child(2n) {
+	background: gray;
+}
+.user_list tbody > tr:hover {
+	background: green;
+	color:yellow;
+}
+</style>
+</head>
+<body>
+	<h1>Table CSS</h1>
+	<table class="user_list">
+		<thead>
+			<tr><th>ID</th><th>PWD</th><th>NAME</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+			<tr><td>id02</td><td>pwd02</td><td>김말숙</td></tr>
+			<tr><td>id03</td><td>pwd03</td><td>정말숙</td></tr>
+			<tr><td>id04</td><td>pwd04</td><td>황말숙</td></tr>
+			<tr><td>id05</td><td>pwd05</td><td>고말숙</td></tr>
+		</tbody>
+	</table>
+</body>
+</html>
+
+
+
+
+

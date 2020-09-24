@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+
+</style>
+<script>
+var ids = [1,2,3,4];
+var qts = [11,21,31,41];
+
+$.ajax({
+	url:'atest',
+	async:false,
+	data:{'id':ids,'qt':qts},
+	traditional : true,
+	success:function(data){
+		arrs = data;
+	},
+	error:function(){
+		
+	}
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

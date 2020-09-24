@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script>
+window.onload = function(){
+	var s1 = setInterval(function(){
+		document.querySelector('#h1').innerHTML += 
+			document.querySelector('#h1').innerHTML+'*';
+	},700);
+	var s2 = setInterval(function(){
+		document.querySelector('#h2').innerHTML += 
+			document.querySelector('#h2').innerHTML+'*';
+	},500);
+	var s3 = setInterval(function(){
+		document.querySelector('#h3').innerHTML += 
+			document.querySelector('#h3').innerHTML+'*';
+	},900);
+	setTimeout(function(){
+		clearInterval(s1);
+		clearInterval(s2);
+		clearInterval(s3);
+	},5000);
+};
+</script>
+</head>
+<body>
+<h1 id="h1"></h1>
+<h1 id="h2"></h1>
+<h1 id="h3"></h1>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+  canvas{
+  	width:400px;
+  	height:400px;
+  	border: 2px solid red;
+  }
+</style>
+<script>
+window.onload = function(){
+	var c=document.getElementById("mycanvas");
+	var ctx=c.getContext("2d");
+	ctx.fillStyle="#FF0000";
+	ctx.fillRect(10,10,150,75);
+};
+</script>
+</head>
+<body>
+<h1>Canvas Test</h1>
+<canvas id="mycanvas"></canvas>
+
+</body>
+</html>
+
+
+

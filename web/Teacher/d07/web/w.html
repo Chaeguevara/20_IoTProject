@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:500px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(data){
+	var items = $(data).find('item');
+	$(items).each(function(index, d){
+		console.log(index+' '+d);
+		var id = $(d).find('stnId').text();
+		var tm = $(d).find('tm').text();
+		var avgTa = $(d).find('avgTa').text();
+		
+		var result = '';
+		result += '<h3>'+id+' '+tm+' '+avgTa+' '+'</h3>';
+		$('div').append(result);
+	});
+};
+function getData(){
+	var urlstr = 'weather';
+	$.ajax({
+		url:urlstr,
+		dataType:'xml',
+		success:function(data){
+			display(data);
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+};
+$(document).ready(function(){
+	$('button').click(function(){
+		getData();
+	});
+});
+</script>
+</head>
+<body>
+<h1>Weather Test</h1>
+<button>Click</button>
+<div></div>
+</body>
+</html>
+
+
+
+

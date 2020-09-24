@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+var emps = [
+	{id:'id01',pwd:'pwd01',name:'james1',age:20},
+	{id:'id02',pwd:'pwd02',name:'james2',age:30},
+	{id:'id03',pwd:'pwd03',name:'james3',age:40},
+	{id:'id04',pwd:'pwd04',name:'james4',age:50},
+	{id:'id05',pwd:'pwd05',name:'james5',age:60}
+];
+
+function getData(){
+	var result = '';
+	for(var i in emps){
+		result += '<h3>'; 
+		result += emps[i].id + ' '+emps[i].name+' '+emps[i].age;
+		result += '</h3>';
+	}
+	document.querySelector('div').innerHTML = result;
+};
+</script>
+</head>
+<body>
+<h1>For Test</h1>
+<a href="#" onclick="getData();">Click</a>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+

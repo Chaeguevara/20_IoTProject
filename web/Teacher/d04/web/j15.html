@@ -1,0 +1,17 @@
+<script>
+var navi =  navigator.userAgent;
+var mobileKeyword = ['iPhone','iPad','LG','SAMSUNG','Android'];
+for(var i in mobileKeyword){
+	if(navigator.userAgent.match(mobileKeyword[i])
+			!= null){
+		// Mobile
+		location.href='http://www.naver.com';
+	}else{
+		// PC
+		location.href='http://www.daum.net';
+	};
+};
+</script>
+
+
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+/* Global CSS  start */
+*{
+	margin:0;
+	padding:0;
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+ul, ol {
+	list-style: none;
+}
+/* Global CSS  end */
+
+/* main CSS  start */
+#main{
+	width:900px;
+	margin:0 auto;
+}
+/* main CSS  end */
+
+/* header CSS  start */
+#main > #h1{
+	position: relative;
+	width:900px;
+	height:50px;
+	background: red;
+}
+#main > #h1 > ul{
+	position: absolute;
+	right:0;
+	top:0;
+}
+#main > #h1 > ul > li{
+	float:left;
+}
+#main > #h1 > ul > li > a{
+	color: white;
+	display: block;
+	margin: 2px 5px;
+}
+#main > #h1 > ul > li > a:hover{
+	font-weight:bold;
+	color:yellow;
+}
+#main > #h2{
+	width:900px;
+	height:120px;
+	background: red;
+}
+#main > #h2 > h1{
+	text-align: center;
+	font-size: 250%;
+	text-shadow: 3px 3px 3px gray;
+	color:white;
+	font-weight: BOLD;
+	line-height: 120px;
+}
+#main > #h3{
+	width:900px;
+	height:50px;
+	background: red;
+}
+#main > #h3 > ul{
+	width:500px;
+	margin: 0 auto;
+}
+#main > #h3 > ul > li{
+	float:left;
+}
+#main > #h3 > ul > li > a{
+	color: white;
+	font-size:140%;
+	font-weight:bold;
+	display: block;
+	width:100px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+	margin: 1px 10px;
+}
+#main > #h3 > ul > li > a:hover{
+	background: blue;
+	color:yellow;
+}
+/* header CSS  end */
+
+/* nav CSS  start */
+#main > nav{
+	width:900px;
+	height:30px;
+	background: blue;
+}
+/* nav CSS  end */
+
+
+/* section CSS  start */
+#main > section{
+	width:900px;
+	height:600px;
+	background: gray;
+}
+#main > section > aside{
+	float:left;
+}
+#main > section > #left_aside{
+	width:130px;
+	height:600px;
+	background: green;	
+}
+#main > section > #center_aside{
+	width:700px;
+	height:600px;
+	background: white;
+}
+#main > section > #right_aside{
+	width:70px;
+	height:600px;
+	background: gray;
+}
+/* section CSS  end */
+
+/* footer CSS  start */
+#main > footer{
+	width:900px;
+	height:40px;
+	background: black;
+}
+/* footer CSS  end */
+
+
+</style>
+</head>
+<body>
+<div id="main">
+	<header id="h1">
+		<ul>
+			<li><a href="#">LOGIN</a></li>
+			<li><a href="#">REGISTER</a></li>
+			<li><a href="#">ABOUT US</a></li>
+			<li><a href="#">HOME</a></li>
+		</ul>
+	</header>
+	<header id="h2">
+		<h1>HTML5 Study Site</h1>
+	</header>
+	<header id="h3">
+		<ul>
+			<li><a href="#">HTML5</a></li>
+			<li><a href="#">CSS3.0</a></li>
+			<li><a href="#">JavaScript</a></li>
+			<li><a href="#">AJAX</a></li>
+		</ul>
+	</header>
+	<nav></nav>
+	<section>
+		<aside id="left_aside"></aside>
+		<aside id="center_aside"></aside>
+		<aside id="right_aside"></aside>
+	</section>
+	<footer></footer>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

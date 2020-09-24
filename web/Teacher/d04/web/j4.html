@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script>
+var email = 'jmlee@tonesol.com';
+var leng = email.length;
+var id = email.substring(0,email.indexOf('@'));
+var domain = 
+email.substring(email.indexOf('@')+1,email.indexOf('.'));
+
+window.onload = function(){
+	document.querySelector('#leng').innerHTML = 
+		document.querySelector('#leng').innerHTML + leng;
+	document.querySelector('#id').innerHTML = 
+		document.querySelector('#id').innerHTML + id;
+	document.querySelector('#domain').innerHTML = 
+		document.querySelector('#domain').innerHTML + domain;
+};
+
+</script>
+</head>
+<body>
+<h1 id="leng">LENGTH:</h1>
+<h1 id="id">ID:</h1>
+<h1 id="domain">DOMAIN:</h1>
+</body>
+</html>
+
+
+
+

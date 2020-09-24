@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+.a{
+	color:yellow;
+	background: black;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$('h1').css('color','red');
+	$('h2').click(function(){
+		$('h2').css('color','blue');
+	});
+	$('h3').hover(function(){
+		$('h3').addClass('a');
+	},function(){
+		$('h3').removeClass('a');
+	});
+	$('h4').on({
+		click:function(){
+			var txt = $('h1').text();
+			$('h2').text(txt);
+		},
+		mouseenter:function(){
+			var txt = '<a href="">Click</a>';
+			$('h3').html(txt);
+		},
+		mouseleave:function(){
+			$('div').slideUp();
+		}
+	});
+	
+	$('button:eq(0)').click(function(){
+		$('div').hide();
+	});
+	$('button:eq(1)').click(function(){
+		$('div').show();
+	});
+	
+});
+</script>
+</head>
+<body>
+<button>Click1</button><button>Click2</button>
+<div>
+	<h1>Header1</h1>
+	<h2>Header2</h2>
+	<h3>Header3</h3>
+	<h4>Header4</h4>
+</div>
+</body>
+</html>
+
+
+
+
+

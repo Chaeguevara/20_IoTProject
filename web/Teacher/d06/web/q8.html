@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:500px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(datas){
+	$(datas).each(function(index,user){
+		var result = '';
+		result += '<h3>';
+		result += user.id+' '+user.pwd+' '+user.name;
+		result += '</h3>';
+		$('div').append(result);
+	});
+};
+
+function getData(){
+	$.ajax({
+		url:'getdata3',
+		success:function(result){
+			display(result);
+		},
+		error:function(){
+			alert('Error.....');
+		}
+	});
+};
+$(document).ready(function(){
+
+	$('button').click(function(){
+		getData();
+	});
+});
+</script>
+</head>
+<body>
+<h1>AJAX TEST</h1>
+<button>Click</button>
+<div></div>
+</body>
+</html>
+
+
+

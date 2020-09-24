@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+div{
+	width:400px;
+	height:200px;
+	border:2px solid red;
+}
+#d2{
+	overflow:auto;
+}
+</style>
+<script>
+function op2(){
+	var num = $('#d1 > input[name="tx"]').val();
+	if(num == '' || num == null){
+		alert('Empty Field ->'+num);
+		$('#d1 > input[name="tx"]').focus();
+		return;
+	}
+	if(isNaN(num)){
+		alert('Not a Number ->'+num);
+		return;
+	}
+	$('#d2').append('<h2>'+num+'</h2>');
+};
+
+function op(n){
+	if(n == '0'){
+		var txt = $('#d1 > h1').text();
+		$('#d2 > h2').text(txt);
+		$('#d2 > input[name="t1"]').val(txt);
+	}else if(n == '1'){
+		op2();
+	}else if(n == '2'){
+		$('#d2').empty();
+	}
+};
+
+$(document).ready(function(){
+	$('button').click(function(){
+		var num = $(this).attr('num');
+		op(num);
+	});
+});
+</script>
+</head>
+<body>
+<button num="0">Click1</button>
+<button num="1">Click2</button>
+<button num="2">Click3</button>
+<button num="3">Click4</button>
+<div id="d1">
+	<h1>Header1</h1>
+	Input Text<input type="text" name="tx"><br>
+</div>
+<div id="d2">
+	<input type="text" name="t1"><br>
+	<h2>Header2</h2>
+</div>
+<div id="d3"></div>
+</body>
+</html>
+
+
+
+
+
+

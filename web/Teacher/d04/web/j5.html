@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script>
+var person = {
+		 id: 'id1',
+		 name: '이말숙',
+		 age:20,
+		 print: function(){
+		 	return this.id+this.name+this.age;
+		 },
+		 getAge:function(){
+			 return this.age;
+		 }
+};
+alert(person.print());
+
+function Car(id, name, size){
+	this.id = id;
+	this.name = name;
+	this.size = size;
+	this.go = function(){
+		return this.id + ' Go ... !';
+	};
+	this.stop = function(){
+		return this.id + ' Stop ... !';
+	};
+};
+
+var car1 = new Car('car1','k1',1000);
+var car2 = new Car('car2','k2',1000);
+
+console.log(car1.go());
+console.log(car2.stop());
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+

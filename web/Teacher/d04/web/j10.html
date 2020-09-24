@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+var nums = [1,2,3,4,5];
+
+function getData(){
+	var result = '';
+	for(var i in nums){
+		result += '<p>'+nums[i]+'</p>';
+	}
+	document.querySelector('div').innerHTML = result;
+};
+</script>
+</head>
+<body>
+<h1>For Test</h1>
+<a href="#" onclick="getData();">Click</a>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+

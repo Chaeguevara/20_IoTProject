@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div{
+	width:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+function getData(){
+	var emps = [
+		{id:'id01',pwd:'pwd01',name:'james1',age:20},
+		{id:'id02',pwd:'pwd02',name:'james2',age:30},
+		{id:'id03',pwd:'pwd03',name:'james3',age:40},
+		{id:'id04',pwd:'pwd04',name:'james4',age:50},
+		{id:'id05',pwd:'pwd05',name:'james5',age:60}
+	];
+	display(emps);
+};
+
+function display(emps){
+	var result = '';
+	result += '<table>';
+	result += '<thead><tr><ht>ID</th><ht>NAME</th><ht>AGE</th></tr><thead>';
+	result += '<tbody>';
+	for(var i in emps){
+		result += '<tr>'; 
+		result += '<td>'+emps[i].id + '</td>';
+		result += '<td>'+emps[i].name+'</td>';
+		result += '<td>'+emps[i].age+'</td>';
+		result += '</tr>';
+	}
+	result += '</tbody>';
+	result += '</table>';
+	document.querySelector('div').innerHTML = result;
+};
+
+setInterval(function(){
+	getData();
+	console.log('Get Data ...');
+},3000);
+</script>
+</head>
+<body>
+<h1>For Test</h1>
+<a href="#" onclick="getData();">Click</a>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+

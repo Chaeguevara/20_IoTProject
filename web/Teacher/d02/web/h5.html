@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div{
+	width:500px;
+	height:500px;
+	border: 2px solid red;
+}
+</style>
+<script>
+	function allowDrop(ev) {
+	 ev.preventDefault();
+	}
+	function drag(ev) {
+	 ev.dataTransfer.setData("text", ev.target.id);
+	}
+	function drop(ev) {
+	 ev.preventDefault();
+	 var data = ev.dataTransfer.getData("text");
+	 ev.target.appendChild(document.getElementById(data));
+	}
+
+	
+window.onload = function(){
+	if (typeof(Storage) !== "undefined") {
+		 // Store
+		 localStorage.setItem("lastname", "Smith");
+		 sessionStorage.setItem("lastname2", "Smith2");
+		 // Retrieve
+		 document.getElementById("result").innerHTML =
+		localStorage.getItem("lastname");
+		} else {
+		 document.getElementById("result").innerHTML = 
+			 "Sorry, your browser does not...";
+		}
+};
+	   
+
+	
+	
+</script>
+</head>
+<body>
+<h1 id="result">Drag & Drop</h1>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"
+></div>
+<img id="drag1" src="icon.png" draggable="true"
+ondragstart="drag(event)" width="336" height="69">
+</body>
+</html>
+
+
+
+
+
+
