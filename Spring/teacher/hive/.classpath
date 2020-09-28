@@ -22,22 +22,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/maria/mariadb-java-client-1.3.5.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/lib/cos.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/lib/jstl.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/lib/ojdbc6_g.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Desktop/lib/standard.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hadoop-core-1.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hive-exec-1.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hive-jdbc-1.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hive-jdbc-1.0.1-standalone.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hive-metastore-1.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/hive-service-1.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/libfb303-0.9.0.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/slf4j-api-1.7.27.jar"/>
-	<classpathentry kind="lib" path="D:/Users/dfso2/Documents/20_IoTProject/Linux/Setupfile/hivelibs/slf4j-log4j12-1.7.27.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
