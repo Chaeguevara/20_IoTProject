@@ -51,6 +51,7 @@ public class Server {
 						System.out.println(mo.getId()+"logged out");// client를 꺼버린 경우 처리.
 					}
 					break;
+					
 				}
 			}
 			if (dis != null) {
