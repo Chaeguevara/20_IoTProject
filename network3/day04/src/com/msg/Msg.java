@@ -10,6 +10,7 @@ public class Msg implements Serializable{
 	private String ip;
 	private String id;
 	private String msg;
+	private String wip;
 	public Msg() {
 	}
 	public Msg(String ip) {
@@ -23,6 +24,20 @@ public class Msg implements Serializable{
 		this.ip = ip;
 		this.id = id;
 		this.msg = msg;
+	}
+	
+	public Msg(String ip, String id, String msg, String wip) {
+		this.ip = ip;
+		this.id = id;
+		this.msg = msg;
+		this.wip = wip;
+	}
+	
+	public String getWip() {
+		return wip;
+	}
+	public void setWip(String wip) {
+		this.wip = wip;
 	}
 	public String getIp() {
 		return ip;

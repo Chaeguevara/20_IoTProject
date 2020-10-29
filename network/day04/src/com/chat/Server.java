@@ -60,6 +60,7 @@ public class Server {
 		oo = new ObjectOutputStream(socket.getOutputStream());
 		maps.put(socket.getInetAddress().toString(), oo);//해쉬맵에 저장.ip + outputstream
 		System.out.println("접속자수:"+maps.size()); //map 크기를 통해 접속자수 구하기.
+		
 	}
 	
 	class Receiver extends Thread{
@@ -81,6 +82,9 @@ public class Server {
 					if(msg.getMsg().equals("q")) {
 						throw new Exception(); // 아래 구문을 작동시키기 위해 일부러 Exception 오류 냄.
 					}
+					System.out.println(
+							msg.getId()+msg.getMsg()
+							);
 					sendMsg(msg); // 한 사용자의 메세지를 모든 클라이언트에게 보낸다.
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -104,8 +108,6 @@ public class Server {
 		}// end run
 		
 		
-		//sendMsg 작동
-		
 	}
 	public void sendMsg(Msg msg) {
 		//Sender Thread 작동
@@ -126,6 +128,29 @@ public class Server {
 					cols.iterator();
 			//컬랙션 데이터를 루프
 			while(it.hasNext()) {
+				//만약 타겟 아이피가 존재한다면, 그곳에만 메세지를 보내고 루프를 멈춘다.
+				if(msg.getWip()!=null) {
+					System.out.println(msg.getWip());
+					if(maps.get("/"+msg.getWip()) != null) {
+						try {
+							maps.get("/"+msg.getWip()).writeObject(msg);
+						} catch (IOException e) {
+							e.printStackTrace();
+						};
+						break;
+					}else {
+						String alert = msg.getWip() +" 님의 정보를 찾을 수 없습니다";
+						System.out.println(alert);
+						msg.setMsg(alert);
+						try {
+							maps.get("/"+msg.getIp()).writeObject(msg);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					}
+					
+				}
 				try {
 					it.next().writeObject(msg);
 				} catch (IOException e) {
