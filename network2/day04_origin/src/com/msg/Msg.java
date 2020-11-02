@@ -1,50 +1,56 @@
 package com.msg;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Msg implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String ip;
+	private HashMap<String, Msg> maps;
+	private ArrayList<String> ips;
 	private String id;
 	private String msg;
-	private String wip;
 	public Msg() {
 	}
-	public Msg(String ip) {
-		this.ip = ip;
-	}
+
 	public Msg(String id, String msg) {
 		this.id = id;
 		this.msg = msg;
 	}
-	public Msg(String ip, String id, String msg) {
-		this.ip = ip;
+
+	public Msg(ArrayList<String> ips, String id, String msg) {
+		this.ips = ips;
 		this.id = id;
 		this.msg = msg;
 	}
-	
-	public Msg(String ip, String id, String msg, String wip) {
-		this.ip = ip;
+
+	public Msg(HashMap<String, Msg> maps, ArrayList<String> ips, String id, String msg) {
+		this.maps = maps;
+		this.ips = ips;
 		this.id = id;
 		this.msg = msg;
-		this.wip = wip;
 	}
-	
-	public String getWip() {
-		return wip;
+
+
+	public HashMap<String, Msg> getMaps() {
+		return maps;
 	}
-	public void setWip(String wip) {
-		this.wip = wip;
+	public void setMaps(HashMap<String, Msg> maps) {
+		this.maps = maps;
 	}
-	public String getIp() {
-		return ip;
+
+	public ArrayList<String> getIps() {
+		return ips;
 	}
-	public void setIp(String ip) {
-		this.ip = ip;
+
+	public void setIps(ArrayList<String> ips) {
+		this.ips = ips;
 	}
+
 	public String getId() {
 		return id;
 	}

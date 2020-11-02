@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.msg.Msg;
 
@@ -51,7 +54,18 @@ public class Client {
 		while(true) {
 			System.out.println("Input msg");
 			String ms = sc.nextLine();
-			Msg msg = new Msg("192.168.0.2",id,ms,"192.168.31.1"); // 타겟 아이피를 설정한다.
+			// 1을 보내면 서버에서는 사용자 리스트를 보낸다.
+			Msg msg = null;
+			if(ms.equals("1")) {
+				msg = new Msg(id,ms);				
+			}else {
+				ArrayList<String> ips = new ArrayList();// 리스트에 메세지를 보낼 ip리스트 정의
+				ips.add("/192.168.0.92");
+				ips.add("/192.168.0.24");
+				ips.add("/192.168.0.15");
+				ips.add("/192.168.0.70");
+				msg = new Msg(null,id,ms);
+			}
 			sender.setMsg(msg);
 			new Thread(sender).start(); // 실제로 보낸다.
 			if(ms.equals("q")) {
@@ -119,6 +133,14 @@ public class Client {
 				Msg msg = null;
 				try {
 					msg = (Msg) oi.readObject();
+					if(msg.getMaps() != null) { //Key값을 꺼낸다.
+						HashMap<String,Msg> hm = msg.getMaps();
+						Set<String> keys = hm.keySet();
+						for(String k: keys) {
+							System.out.println(k);
+						}
+						continue;
+					}
 					System.out.println(msg.getId()+msg.getMsg());
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -140,7 +162,7 @@ public class Client {
 	}
 	
 	public static void main(String[] args) {
-		Client client = new Client("192.168.0.2",5555,"[Chaeguevara]");
+		Client client = new Client("192.168.0.24",5555,"[Chaeguevara]");
 		try {
 			client.connect();
 			client.sendMsg();

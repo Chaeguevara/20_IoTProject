@@ -5,9 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 import com.msg.Msg;
 
@@ -70,7 +72,7 @@ public class Server {
 		
 		public Receiver(Socket socket) throws IOException {
 			this.socket = socket;
-			oi = new ObjectInputStream(socket.getInputStream());
+			oi = new ObjectInputStream(this.socket.getInputStream());
 		}
 
 		@Override
@@ -81,6 +83,24 @@ public class Server {
 					msg = (Msg) oi.readObject();
 					if(msg.getMsg().equals("q")) {
 						throw new Exception(); // 아래 구문을 작동시키기 위해 일부러 Exception 오류 냄.
+					}else if(msg.getMsg().equals("1")) {
+						//1을 받으면, 접속한 사람의 정보를 보내준다.
+						//나의 IP주소를 찾아 그곳에 메세지를 보낸다.
+						String ip =
+						socket.getInetAddress().toString();
+						ArrayList<String> ips = new ArrayList<>();
+						ips.add(ip);
+						msg.setIps(ips);
+						
+						Set<String> keys = maps.keySet(); // map에서 key만 꺼냄(ip주소들)
+						HashMap<String,Msg> hm = new HashMap<>();
+						//루프를 통해 hashmap의 key 값만 넣음 
+						for(String k:keys) {
+							hm.put(k, null);
+						}
+						// 1을 보낸 client
+						// 서버의 접속자 ip들
+						msg.setMaps(hm);
 					}
 					System.out.println(
 							msg.getId()+msg.getMsg()
@@ -128,31 +148,19 @@ public class Server {
 					cols.iterator();
 			//컬랙션 데이터를 루프
 			while(it.hasNext()) {
-				//만약 타겟 아이피가 존재한다면, 그곳에만 메세지를 보내고 루프를 멈춘다.
-				if(msg.getWip()!=null) {
-					System.out.println(msg.getWip());
-					if(maps.get("/"+msg.getWip()) != null) {
+				if(msg.getIps()!=null) {
+					for(String ip:msg.getIps()) {
 						try {
-							maps.get("/"+msg.getWip()).writeObject(msg);
-						} catch (IOException e) {
-							e.printStackTrace();
-						};
-						break;
-					}else {
-						String alert = msg.getWip() +" 님의 정보를 찾을 수 없습니다";
-						System.out.println(alert);
-						msg.setMsg(alert);
-						try {
-							maps.get("/"+msg.getIp()).writeObject(msg);
+							maps.get(ip).writeObject(msg);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						break;
 					}
-					
+					break;							
 				}
 				try {
 					it.next().writeObject(msg);
+					System.out.println("broadcast");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
