@@ -16,11 +16,21 @@
 <script>
 	function fetchdata() {
 		$.ajax({
-			url : 'msgToBrower.mc',
+			url : 'statusToBrower.mc',
 			type : 'post',
 			success : function(response) {
 				// Perform operation on the return value
-				$('#iotMessage').html(response);
+				$('#iotStatus').html(response);
+			}
+		});
+	}
+	function fetchcmd() {
+		$.ajax({
+			url : 'itemToBrower.mc',
+			type : 'post',
+			success : function(response) {
+				// Perform operation on the return value
+				$('#lastScan').html("Last scanned : " + response);
 			}
 		});
 	}
@@ -33,6 +43,8 @@
 				}
 			});
 		});
+		setInterval(fetchdata, 500);
+		setInterval(fetchcmd, 500);
 		$('#iot_t').click(function() {
 			$.ajax({
 				url : 'iotStop.mc',
@@ -41,7 +53,7 @@
 				}
 			});
 		});
-		setInterval(fetchdata,500);
+		
 		$('#phone').click(function() {
 			$.ajax({
 				url : 'phone.mc',
@@ -50,6 +62,7 @@
 				}
 			});
 		});
+		
 	});
 </script>
 
@@ -58,6 +71,16 @@
 <body>
 
 	<h1>Main Page</h1>
+	<h2>IoT장비 IP설정</h2>
+	<form id="IoTsubmit" action="IoTsubmit.mc" method="post">
+		<div>
+			<input type="text" name="id" placeholder="/xxx.xxx.xxx.xxx">
+		</div>
+		<div>
+			<input type="submit" value="IP등록">
+		</div>
+	</form>
+	<h2 id="iotIP"></h2>
 	<h2>
 		<a id="iot_s" href="#">Start IoT(TCP/IP)</a>
 	</h2>
@@ -67,8 +90,10 @@
 	<h2>
 		<a id="phone" href="#">Send Phone(FCM)</a>
 	</h2>
-	<h2 id="iotMessage">
-	</h2>
+	<h2>IoT Status</h2>
+	<h3 id="iotStatus"></h3>
+	<h3 id="lastScan"></h3>
+
 
 
 

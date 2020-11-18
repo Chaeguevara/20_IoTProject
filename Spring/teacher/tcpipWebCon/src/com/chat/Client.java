@@ -19,7 +19,7 @@ public class Client {
 	String address;
 	String id;
 	Socket socket;
-	
+	String iotCmd;
 	Sender sender;
 	
 	public Client() {
@@ -31,6 +31,12 @@ public class Client {
 		this.id = id;
 	}
 	
+	public String getIotCmd() {
+		return iotCmd;
+	}
+	public void setIotCmd(String iotCmd) {
+		this.iotCmd = iotCmd;
+	}
 	public void connect() throws IOException {
 		try {
 			socket = new Socket(address, port);
@@ -53,7 +59,7 @@ public class Client {
 		 new Receiver(socket).start();
 	} // connect end
 	
-	// web App�뿉�꽌 �뜲�씠�꽣瑜� 諛쏄퀬 cmd 瑜� 蹂대궦�떎 ============================================= 
+	// 지정한 IP로 메세지를 보내는 기능
 	public void sendTarget(String ip, String cmd) {
 		ArrayList<String> ips = new ArrayList<String>();
 		ips.add(ip);
@@ -174,10 +180,14 @@ public class Client {
 						continue; // 怨꾩냽 諛쏆븘�빞 �븯湲� �븣臾몄뿉 �븘�옒瑜� 嫄대꼫 �쎇怨� �떎�떆 �떎�뻾
 					}
 					System.out.println(msg.getId()+" : "+msg.getMsg());
-					// IoT에서 서버로 데이터를 전송한다
+					// IoT에서 서버로 데이터를 전송한다. 즉 http방식이지 Client통신이라고 보기는 어렵다. 다른방식을 사용해야할듯.
+					if(msg.getMsg().contains("turned")) {
+						iotCmd = msg.getMsg();
+					}
 					if(msg.getId().equals("[Chaeguevara_IoT]")) {
-						
-						String urlstr = "http://127.0.0.1/tcpip/iotToServer.mc";
+
+						String urlstr = "http://ec2-3-35-11-144.ap-northeast-2.compute.amazonaws.com:8080/tcpipWebCon/iotToServer.mc";
+						//String urlstr = "http://127.0.0.1/tcpip/iotToServer.mc";
 						URL url = null;
 						HttpURLConnection con = null;
 						

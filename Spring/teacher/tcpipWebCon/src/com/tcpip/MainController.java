@@ -28,10 +28,13 @@ public class MainController {
 	
 	Client client;
 	String ss;
+	String iotIP;
+	String iotStatus;
+	Items scanItem;
 		
 	public MainController() {
 		// TCP-IP와 연결한다. TCP-IP서버 IP로 항상 변경해 주도록 하자.
-		client = new Client("192.168.0.92",5555,"[WEB]");
+		client = new Client("3.35.11.144",5555,"[WEB]");
 		try {
 			client.connect();
 		} catch (IOException e) {
@@ -49,7 +52,7 @@ public class MainController {
 	@RequestMapping("/iotStart.mc")
 	public void iotStart(HttpServletResponse res) throws IOException {
 		System.out.println("IoT Send Start...");
-		client.sendTarget("/192.168.0.150", "s");
+		client.sendTarget(iotIP, "s");
 		PrintWriter out = res.getWriter();
 		ss = "s";
 		out.print("ok");
@@ -59,7 +62,7 @@ public class MainController {
 	@RequestMapping("/iotStop.mc")
 	public void iotStop(HttpServletResponse res) throws IOException {
 		System.out.println("IoT Send Start...");
-		client.sendTarget("/192.168.0.150", "t");
+		client.sendTarget(iotIP, "t");
 		PrintWriter out = res.getWriter();
 		ss = "t";
 		out.print("ok");
@@ -77,27 +80,56 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping("/iotToServer.mc")
-	public void iotToServer(HttpServletRequest res){
-		//메세지를 받아서 ss에 내용을 저장한다
-		ss = res.getParameter("ss");
-		System.out.println(ss);
+	@RequestMapping("/IoTsubmit.mc")
+	public void IoTsubmit(HttpServletRequest res) throws InterruptedException{
+		iotIP = res.getParameter("id");
+		System.out.println(iotIP);
 		
-	}
-
-	@RequestMapping("/getJson.mc")
-	@ResponseBody
-	public void getJson(@RequestBody Items item){
-
-		System.out.println(item);
+		//10초간 장비를 켠 후 끈다.
+		client.sendTarget(iotIP, "s");
+		Thread.sleep(10000);
+		client.sendTarget(iotIP, "t");
 		
 	}
 	
-	@RequestMapping("/msgToBrower.mc")
-	public void msgToBrower(HttpServletResponse res) throws IOException{
+	//IoT로 부터 상태메세지를 출력한다. Client로 받은 것을 출력함.
+	@RequestMapping("/iotToServer.mc")
+	public void iotToServer(HttpServletRequest res){
+		//메세지를 받아서 내용을 저장한다
+		iotStatus = res.getParameter("ss");
+		System.out.println(iotStatus);
+		
+	}
+
+	//QR로 부터 Json을 받아 IoT장비를 작동 시킵니다.
+	@RequestMapping("/getJson.mc")
+	@ResponseBody
+	public void getJson(@RequestBody Items item) throws InterruptedException{
+		//데이터가 들어왔는지 확인
+		System.out.println(item);
+		//들어온 아이템 할당
+		scanItem = item;
+		//10초간 장비를 켠 후 끈다.
+		client.sendTarget(iotIP, "s");
+		Thread.sleep(10000);
+		client.sendTarget(iotIP, "t");
+		
+	}
+	//현재 아두이노상태(Ready)를 웹에 띄운다
+	@RequestMapping("/statusToBrower.mc")
+	public void statusToBrower(HttpServletResponse res) throws IOException{
 		//web에서 현재 메세지를 요청하면 ss를 내보내준다.
 		PrintWriter out = res.getWriter();
-		out.print(ss);
+		out.print(iotStatus);
+		out.close();
+		
+	}
+	
+	// 가장 최근에 스캔한 아이템을 웹으로 넘긴다.
+	@RequestMapping("/itemToBrower.mc")
+	public void itemToBrower(HttpServletResponse res) throws IOException{
+		PrintWriter out = res.getWriter();
+		out.print(scanItem.toString());
 		out.close();
 		
 	}
