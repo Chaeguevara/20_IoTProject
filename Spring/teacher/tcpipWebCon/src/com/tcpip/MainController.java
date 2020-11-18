@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chat.Client;
+import com.vo.Items;
 
 
 @Controller 
@@ -27,7 +30,8 @@ public class MainController {
 	String ss;
 		
 	public MainController() {
-		client = new Client("192.168.0.13",5555,"[WEB]");
+		// TCP-IP와 연결한다. TCP-IP서버 IP로 항상 변경해 주도록 하자.
+		client = new Client("192.168.0.92",5555,"[WEB]");
 		try {
 			client.connect();
 		} catch (IOException e) {
@@ -45,8 +49,9 @@ public class MainController {
 	@RequestMapping("/iotStart.mc")
 	public void iotStart(HttpServletResponse res) throws IOException {
 		System.out.println("IoT Send Start...");
-		client.sendTarget("/192.168.0.27", "s");
+		client.sendTarget("/192.168.0.150", "s");
 		PrintWriter out = res.getWriter();
+		ss = "s";
 		out.print("ok");
 		out.close();
 		
@@ -54,8 +59,9 @@ public class MainController {
 	@RequestMapping("/iotStop.mc")
 	public void iotStop(HttpServletResponse res) throws IOException {
 		System.out.println("IoT Send Start...");
-		client.sendTarget("/192.168.0.27", "t");
+		client.sendTarget("/192.168.0.150", "t");
 		PrintWriter out = res.getWriter();
+		ss = "t";
 		out.print("ok");
 		out.close();
 		
@@ -73,14 +79,23 @@ public class MainController {
 	
 	@RequestMapping("/iotToServer.mc")
 	public void iotToServer(HttpServletRequest res){
+		//메세지를 받아서 ss에 내용을 저장한다
 		ss = res.getParameter("ss");
 		System.out.println(ss);
-		client.sendTarget("/192.168.0.92", ss);
+		
+	}
+
+	@RequestMapping("/getJson.mc")
+	@ResponseBody
+	public void getJson(@RequestBody Items item){
+
+		System.out.println(item);
 		
 	}
 	
 	@RequestMapping("/msgToBrower.mc")
 	public void msgToBrower(HttpServletResponse res) throws IOException{
+		//web에서 현재 메세지를 요청하면 ss를 내보내준다.
 		PrintWriter out = res.getWriter();
 		out.print(ss);
 		out.close();

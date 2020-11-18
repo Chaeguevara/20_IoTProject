@@ -3,7 +3,9 @@ package com.chat;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -48,7 +50,7 @@ public class Client {
 		System.out.println("Connected Server : "+address);
 		sender = new Sender(socket);
 		// Server�뿉�꽌 蹂대궦 �뜲�씠�꽣 諛쏄린 �쐞�빐 receiver �떎�뻾 
-		// new Receiver(socket).start();
+		 new Receiver(socket).start();
 	} // connect end
 	
 	// web App�뿉�꽌 �뜲�씠�꽣瑜� 諛쏄퀬 cmd 瑜� 蹂대궦�떎 ============================================= 
@@ -172,6 +174,32 @@ public class Client {
 						continue; // 怨꾩냽 諛쏆븘�빞 �븯湲� �븣臾몄뿉 �븘�옒瑜� 嫄대꼫 �쎇怨� �떎�떆 �떎�뻾
 					}
 					System.out.println(msg.getId()+" : "+msg.getMsg());
+					// IoT에서 서버로 데이터를 전송한다
+					if(msg.getId().equals("[Chaeguevara_IoT]")) {
+						
+						String urlstr = "http://127.0.0.1/tcpip/iotToServer.mc";
+						URL url = null;
+						HttpURLConnection con = null;
+						
+						try {
+							url = new URL(urlstr + "?ss=" + msg.getMsg());
+							con = (HttpURLConnection) url.openConnection();
+							// wait 5 sec
+							con.setReadTimeout(5000);
+							con.setRequestMethod("POST");
+							con.getInputStream();
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							con.disconnect();
+						}
+						
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					break;

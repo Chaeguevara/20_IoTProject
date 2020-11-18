@@ -163,7 +163,7 @@ public class Client {
 	}
 	
 	public static void main(String[] args) {
-		Client client = new Client("192.168.0.24",5555,"[Chaeguevara_PC]");
+		Client client = new Client("3.35.11.144",5555,"[Chaeguevara_PC]");
 		try {
 			client.connect();
 			client.sendMsg();
